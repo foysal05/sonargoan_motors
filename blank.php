@@ -120,7 +120,7 @@ if ($_SESSION['sm_staff']==TRUE) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer-copy-right">
-                            <p>Copyright &copy; <?php echo date('Y'); ?> <a href="https://colorlib.com/wp/templates/">Sonargoan Motors</a> All rights reserved.</p>
+                            <p>Copyright &copy; <?php echo date('Y'); ?> Sonargoan Motors All rights reserved.</p>
                         </div>
                     </div>
                 </div>

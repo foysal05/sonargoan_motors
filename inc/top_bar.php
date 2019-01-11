@@ -15,14 +15,13 @@
                              <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                 <div class="header-top-menu tabl-d-n">
                                     <ul class="nav navbar-nav mai-top-nav">
-                                        <li class="nav-item"><a href="index" class="nav-link">Home</a>
+                                        <li class="nav-item"><a href="index" class="nav-link">Purchase</a>
                                         </li>
-                                        <li class="nav-item"><a href="#" class="nav-link">About</a>
+                                        <li class="nav-item"><a href="#" class="nav-link">Sale</a>
                                         </li>
-                                        <li class="nav-item"><a href="#" class="nav-link">Services</a>
+                                        <li class="nav-item"><a href="#" class="nav-link">Invoice</a>
                                         </li>
-                                        <li class="nav-item"><a href="#" class="nav-link">Support</a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -33,7 +32,7 @@
                                         <li class="nav-item">
                                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                <i class="fa fa-user adminpro-user-rounded header-riht-inf" aria-hidden="true"></i>
-                                               <span class="admin-name">Advanda Cro</span>
+                                               <span class="admin-name"><?php echo $_SESSION['name'];?></span>
                                                <i class="fa fa-angle-down adminpro-icon adminpro-down-arrow"></i>
                                            </a>
                                            <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
