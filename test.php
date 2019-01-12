@@ -8,5 +8,18 @@
     <body>
             <span id="date_time"></span>
             <script type="text/javascript">window.onload = date_time('date_time');</script>
+            <table style="border: 1px;">
+            	<tr>
+            		<td>Name</td>
+            		<td>Age</td>
+            		<td colspan="2">Action</td>
+            	</tr>
+            	<tr>
+            		<td>Foysal</td>
+            		<td>24</td>
+            		<td>Edit</td>
+            		<td>Delete</td>
+            	</tr>
+            </table>
     </body>
 </html>
