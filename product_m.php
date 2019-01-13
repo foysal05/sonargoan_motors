@@ -6,7 +6,9 @@ if ($_SESSION['sm_staff']==TRUE) {
 
 <!doctype html>
 <html class="no-js" lang="en">
-
+<!-- dropzone CSS
+        ============================================ -->
+    <link rel="stylesheet" href="css/dropzone/dropzone.css">
 <?php include('inc/head.php');?>
 <body>
     <!--[if lt IE 8]>
@@ -39,36 +41,78 @@ if ($_SESSION['sm_staff']==TRUE) {
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="review-tab-pro-inner">
+    <?php
+
+    if (isset($_GET['added'])==1) {
+        ?>
+
+        <div class="alert alert-success alert-st-one" role="alert">
+            <i class="fa fa-check adminpro-checked-pro admin-check-pro" aria-hidden="true"></i>
+            <p class="message-mg-rt"><strong>Well done!</strong> Product Information Added Sussessfully.</p>
+        </div>
+        <?php
+    }else if (isset($_GET['exist'])==1) {
+     ?>
+     <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
+        <i class="fa fa-window-close adminpro-danger-error admin-check-pro" aria-hidden="true"></i>
+        <i class="fa fa-times adminpro-danger-error admin-check-pro" aria-hidden="true"></i>
+        <p class="message-mg-rt"><strong>Oh snap!</strong> This Product May Be Exist.</p>
+    </div>
+    <?php
+}
+
+?>
                                 <ul id="myTab3" class="tab-review-design">
                                     <li class="active"><a href="#description"><i class="fa fa-pencil" aria-hidden="true"></i> Product Add/Edit</a></li>
                                     <!-- <li><a href="#reviews"><i class="fa fa-ticket" aria-hidden="true"></i> Pictures</a></li> -->
-                                    <li><a href="#INFORMATION"><i class="fa fa-briefcase" aria-hidden="true"></i> Brand</a></li>
+                                   <!--  <li><a href="#INFORMATION"><i class="fa fa-briefcase" aria-hidden="true"></i> Brand</a></li> -->
                                 </ul>
 <div id="myTabContent" class="tab-content custom-product-edit">
 <div class="product-tab-list tab-pane fade active in" id="description">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 <div class="review-content-section">
+    <form action="db/db_product.php" method="post" enctype="multipart/form-data">
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-cog" aria-hidden="true"></i></span>
-<input type="text" class="form-control" name="name" placeholder="Parts Name">
+<input type="text" class="form-control" required="" name="name" placeholder="Parts Name">
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-<input type="text" class="form-control" name="model" placeholder="Model">
+<input type="text" class="form-control" required="" name="model" placeholder="Model">
 </div>
 
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
-<input type="text" class="form-control" name="brand" placeholder="Brand">
+<input type="text" class="form-control" required="" name="brand" placeholder="Brand">
 </div>
+<div class="form-group">
+    <label for="exampleFormControlFile1">Parts Photo</label>
+    <input accept=".jpg,.jpeg,.png" name="parts_photo" type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+<?php
+if (isset($_GET['update']) && $_GET['p_id']) {
+   ?>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b>P</b></span>
+<input type="text" class="form-control"  readonly=""  placeholder="Purchase Price">
+</div>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b style="color: green">ট</b></span>
+<input type="text" class="form-control" required="" name="wholesale" onkeypress="return isNumberKey(event)" placeholder="Wholesale Price">
+</div>
+
+<?php
+
+}
+?>
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 <div class="review-content-section">
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-flag " aria-hidden="true"></i></span>
-     <select data-placeholder="Choose a Country..." name="region" class="form-control chosen-select" tabindex="-1">
+     <select data-placeholder="Choose a Country..." required="" name="region" class="form-control chosen-select" tabindex="-1">
                                                         <option value="">Select Region</option>
                                                         <option value="United States">United States</option>
                                                         <option value="United Kingdom">United Kingdom</option>
@@ -334,23 +378,55 @@ if ($_SESSION['sm_staff']==TRUE) {
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-qrcode" aria-hidden="true"></i></span>
-<input type="text" class="form-control" name="code" placeholder="Code">
+<input type="text" class="form-control" required="" name="code" placeholder="Code">
 </div>
 
 
+<?php
+if (isset($_GET['update']) && $_GET['p_id']) {
+   ?>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b>Q</b></span>
+<input type="text" class="form-control"  readonly=""  placeholder="Quantity">
+</div>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b style="color: blue">ট</b></span>
+<input type="text" class="form-control" required="" name="retail" onkeypress="return isNumberKey(event)" placeholder="Retail Price">
+</div>
+
+
+
+<?php
+}
+?>
+
 </div>
 </div>
 </div>
+
 <div class="row">
+    
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
-<button type="button" class="btn btn-primary waves-effect waves-light m-r-10">Save
+<button type="submit" name="add_product" class="btn btn-primary waves-effect waves-light m-r-10">Save
 </button>
-<button type="button" class="btn btn-warning waves-effect waves-light">Discard
+<button type="reset" name="" class="btn btn-info  m-r-10">Reset
 </button>
+<?php
+if (isset($_GET['update']) && $_GET['p_id']) {
+   ?>
+<button type="submit" name="update_product" class="btn btn-primary waves-effect waves-light m-r-10">Update
+</button>
+
+   <?php
+}
+
+?>
+
 </div>
 </div>
 </div>
+</form>
 </div>
 <!-- <div class="product-tab-list tab-pane fade" id="reviews">
 <div class="row">
@@ -418,46 +494,12 @@ if ($_SESSION['sm_staff']==TRUE) {
 </div>
 </div>
 </div> -->
-<div class="product-tab-list tab-pane fade" id="INFORMATION">
+<!-- <div class="product-tab-list tab-pane fade" id="INFORMATION">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 <div class="review-content-section">
 <div class="card-block">
-<!-- <div class="text-muted f-w-400">
-    <p>No reviews yet.</p>
-</div> -->
-<!-- <div class="m-t-10">
-    <div class="txt-primary f-18 f-w-600">
-        <p>Your Rating</p>
-    </div>
-    <div class="stars stars-example-css detail-stars">
-        <div class="review-rating">
-            <fieldset class="rating">
-                <input type="radio" id="star5" name="rating" value="5">
-                <label class="full" for="star5"></label>
-                <input type="radio" id="star4half" name="rating" value="4 and a half">
-                <label class="half" for="star4half"></label>
-                <input type="radio" id="star4" name="rating" value="4">
-                <label class="full" for="star4"></label>
-                <input type="radio" id="star3half" name="rating" value="3 and a half">
-                <label class="half" for="star3half"></label>
-                <input type="radio" id="star3" name="rating" value="3">
-                <label class="full" for="star3"></label>
-                <input type="radio" id="star2half" name="rating" value="2 and a half">
-                <label class="half" for="star2half"></label>
-                <input type="radio" id="star2" name="rating" value="2">
-                <label class="full" for="star2"></label>
-                <input type="radio" id="star1half" name="rating" value="1 and a half">
-                <label class="half" for="star1half"></label>
-                <input type="radio" id="star1" name="rating" value="1">
-                <label class="full" for="star1"></label>
-                <input type="radio" id="starhalf" name="rating" value="half">
-                <label class="half" for="starhalf"></label>
-            </fieldset>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div> -->
+
         <div class="input-group mg-b-6 mg-t-6">
             <span class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
             <input type="text" class="form-control" name="brand_name" placeholder="Brand Name">
@@ -472,10 +514,7 @@ if ($_SESSION['sm_staff']==TRUE) {
                 <option value="Bike">Bike</option>
             </select>
         </div>
-                                                       <!--  <div class="input-group mg-b-15">
-                                                            <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-                                                            <input type="text" class="form-control" placeholder="Email">
-                                                        </div> -->
+                                                      
                                                         <br>
                                                         <div class="form-group review-pro-edt">
                                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Submit
@@ -530,7 +569,7 @@ if ($_SESSION['sm_staff']==TRUE) {
                         </div>
                     </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -588,15 +627,9 @@ if ($_SESSION['sm_staff']==TRUE) {
     <script src="js/morrisjs/raphael-min.js"></script>
     <script src="js/morrisjs/morris.js"></script>
     <script src="js/morrisjs/morris-active.js"></script>
-    <!-- morrisjs JS
-		============================================ -->
-    <script src="js/sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/sparkline/jquery.charts-sparkline.js"></script>
-    <!-- calendar JS
-		============================================ -->
-    <script src="js/calendar/moment.min.js"></script>
-    <script src="js/calendar/fullcalendar.min.js"></script>
-    <script src="js/calendar/fullcalendar-active.js"></script>
+<!-- dropzone JS
+        ============================================ -->
+    <script src="js/dropzone/dropzone.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>

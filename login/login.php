@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Sonargoan Motors</title>
+	<title>Sonargaon Motors</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -34,7 +34,7 @@
 			<div class="wrap-login100 p-t-85 p-b-20">
 				<form action="../db/db_login.php" method="post" class="login100-form validate-form">
 					<span class="login100-form-title p-b-70">
-						Welcome to Sonargoan Motors
+						Welcome to Sonargaon Motors
 					</span>
 					<!-- <span class="login100-form-avatar">
 						<img src="images/avatar-01.jpg" alt="AVATAR">

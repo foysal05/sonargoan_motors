@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sonargoan Motors</title>
+    <title>Sonargaon Motors</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -67,6 +67,18 @@
         ============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="date_time.js"></script>
+    <script type="text/javascript">
+          function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+               //If you don't want to allow decimals
+              //if (charCode > 31 && (charCode < 48 || charCode > 57))
+              //If you want to allow decimals
+              if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
+                return false;
+            return true;
+        }
+
+    </script> 
 </head>
 <style type="text/css">
        .breadcome-list{
