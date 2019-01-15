@@ -35,7 +35,7 @@ if ($_SESSION['sm_staff']==TRUE) {
        }
    </style>
         <!-- <div class="section-admin container-fluid">
-		
+        
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
@@ -49,12 +49,12 @@ if ($_SESSION['sm_staff']==TRUE) {
         </div> -->
  <?php
 
-    if (isset($_GET['updated'])==1) {
+    if (isset($_GET['added'])==1) {
         ?>
 
         <div class="alert alert-success alert-st-one" role="alert">
             <i class="fa fa-check adminpro-checked-pro admin-check-pro" aria-hidden="true"></i>
-            <p class="message-mg-rt"><strong>Well done!</strong> Product Information Updated Sussessfully.</p>
+            <p class="message-mg-rt"><strong>Well done!</strong> Purchase Information Added Sussessfully.</p>
         </div>
         <?php
     }else if (isset($_GET['exist'])==1) {
@@ -95,10 +95,10 @@ if ($_SESSION['sm_staff']==TRUE) {
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                    <h1>Products <span class="table-project-n">List</span> </h1>
+                                    <h1>Products <span class="table-project-n">Purchase</span> History</h1>
                                 </div>
                                 <div class="add-product">
-                                <a href="product_m">Add Product</a>
+                                <a href="purchase">Purchase Product</a>
                             </div>
                             </div>
                             <div class="sparkline13-graph">
@@ -118,20 +118,21 @@ if ($_SESSION['sm_staff']==TRUE) {
             <th data-field="state" data-checkbox="true"></th>
             
             <th data-field="name" data-editable="true">Product Name</th>
-            <th data-field="company" data-editable="true">Model</th>
-            <th data-field="price" data-editable="true">Brand</th>
-            <th data-field="date" data-editable="true">Country</th>
-            <th data-field="task" data-editable="true">Vehicle</th>
-            <th data-field="code" data-editable="true">Code</th>
-            <th data-field="email" data-editable="true">Quantity</th>
-            <th data-field="action">Action</th>
+            <th data-field="model" data-editable="true">Model</th>
+            <th data-field="company" data-editable="true">Code</th>
+            <th data-field="price" data-editable="true">Quantity</th>
+            <th data-field="date" data-editable="true">Unit Price</th>
+            <th data-field="task" data-editable="true">Total Price</th>
+            <th data-field="code" data-editable="true">Date</th>
+            <th data-field="email" data-editable="true">Time</th>
+            <!-- <th data-field="action">Purchase</th> -->
         </tr>
     </thead>
  <tbody>
                                            
 <?php
 include('db/db.php');
-$query="select * from product WHERE p_id<>0";
+$query="select * from product,purchase WHERE product.p_id=purchase.product_id";
 $result=mysqli_query($con,$query);
 //echo mysqli_error();
 if(mysqli_num_rows($result)>0){
@@ -143,45 +144,19 @@ echo "<tr>";
 echo "<td style='text-align: center'></td>"; 
 echo "<td style='text-align: center'>".$row['name']."</td>"; 
 echo "<td style='text-align: center'>".$row['model']."</td>";
-echo "<td style='text-align: center'>".$row['brand']."</td>";
-echo "<td style='text-align: center'>".$row['region']."</td>";
-echo "<td style='text-align: center'>".$row['vehicle']."</td>";
 echo "<td style='text-align: center'>".$row['code']."</td>";
-echo "<td style='text-align: center'>".$row['quantity']."</td>";
+echo "<td style='text-align: center'>".$row['pu_quantity']."</td>";
+echo "<td style='text-align: center'>".$row['unit_price']."</td>";
+echo "<td style='text-align: center'>".$row['total_price']."</td>";
+echo "<td style='text-align: center'>".$row['date']."</td>";
+echo "<td style='text-align: center'>".$row['time']."</td>";
 
-// echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='branch_report?view&id=".$row['p_id']."'><button class='btn btn-info'>Details</button></a></td>"; 
-echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
+// echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='purchase_input?add&id=".$row['p_id']."&name=".$row['name']."'><button class='btn btn-info'>Purchase</button></a></td>"; 
+// echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
 
 echo "</tr>";
 ?>
-<!--  <a class="Danger danger-color" href="#" data-toggle="modal" data-target="#DangerModalhdbgcl">Danger</a> -->
-<div id="DangerModalhdbgcl<?php echo $id;?>" class="modal modal-adminpro-general FullColor-popup-DangerModal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header header-color-modal bg-color-4">
-                                        <h4 class="modal-title"><?php echo $row['name'];?></h4>
-                                        <div class="modal-close-area modal-close-df">
-                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <?php  echo "Product ID : ". $row['p_id'];?>
-                                    <div class="modal-body">
-                                        <span class="adminpro-icon adminpro-danger-error modal-check-pro information-icon-pro"></span>
-                                        <img width="400" height="400" src="db/<?php echo $row['photo'];?>">
-                                        
-                        <p>Wholesale Price : <?php echo $row['wholesale'];?> </p>
-                        <p>Retail Price : <?php echo $row['retail'];?> </p>
-                                        
-                                       
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a data-dismiss="modal" href="#">Cancel</a>
-                                        <a href="product_m?update&p_id=<?php echo $row['p_id'];?>&name=<?php echo $row['name'];?>&model=<?php echo $row['model'];?>&brand=<?php echo $row['brand'];?>&code=<?php echo $row['code'];?>&vehicle=<?php echo $row['vehicle'];?>&wholesale=<?php echo $row['wholesale'];?>&retail=<?php echo $row['retail'];?>&photo=<?php echo $row['photo'];?>&quantity=<?php echo $row['quantity'];?>">Update</a>
-                                        <a class="confirmation" href="db/db_product.php?delete&id<?php echo $row['p_id'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 <?php
 
 }

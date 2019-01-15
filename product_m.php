@@ -75,20 +75,20 @@ if ($_SESSION['sm_staff']==TRUE) {
     <form action="db/db_product.php" method="post" enctype="multipart/form-data">
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-cog" aria-hidden="true"></i></span>
-<input type="text" class="form-control" required="" name="name" placeholder="Parts Name">
+<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['name'];} ?>" name="name" placeholder="Parts Name">
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-<input type="text" class="form-control" required="" name="model" placeholder="Model">
+<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['model'];} ?>" name="model" placeholder="Model">
 </div>
 
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
-<input type="text" class="form-control" required="" name="brand" placeholder="Brand">
+<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['brand'];} ?>" name="brand" placeholder="Brand">
 </div>
 <div class="form-group">
     <label for="exampleFormControlFile1">Parts Photo</label>
-    <input accept=".jpg,.jpeg,.png" name="parts_photo" type="file" class="form-control-file" id="exampleFormControlFile1">
+    <input accept=".jpg,.jpeg,.png"  name="parts_photo" type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
 <?php
 if (isset($_GET['update']) && $_GET['p_id']) {
@@ -99,7 +99,7 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><b style="color: green">ট</b></span>
-<input type="text" class="form-control" required="" name="wholesale" onkeypress="return isNumberKey(event)" placeholder="Wholesale Price">
+<input type="text" class="form-control" required="" name="wholesale" onkeypress="return isNumberKey(event)" value="<?php if(isset($_GET['wholesale'])){echo $_GET['wholesale'];} ?>" placeholder="Wholesale Price">
 </div>
 
 <?php
@@ -113,7 +113,7 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-flag " aria-hidden="true"></i></span>
      <select data-placeholder="Choose a Country..." required="" name="region" class="form-control chosen-select" tabindex="-1">
-                                                        <option value="">Select Region</option>
+                                                        <option value="">Select Country</option>
                                                         <option value="United States">United States</option>
                                                         <option value="United Kingdom">United Kingdom</option>
                                                         <option value="Afghanistan">Afghanistan</option>
@@ -371,14 +371,14 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 <span class="input-group-addon"><i class="fa fa-car" aria-hidden="true"></i></span>
 <select class="form-control" required="" name="vehicle">
     <option value="">Select Vehicle Type</option>
-    <option value="Car">Car</option>
+    <option <?php if(isset($_GET['vehicle'])=='Car'){echo "selected";} ?> value="Car">Car</option>
     <option value="Bike">Bike</option>
     
 </select>
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><i class="fa fa-qrcode" aria-hidden="true"></i></span>
-<input type="text" class="form-control" required="" name="code" placeholder="Code">
+<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['code'];} ?>" name="code" placeholder="Code">
 </div>
 
 
@@ -387,11 +387,11 @@ if (isset($_GET['update']) && $_GET['p_id']) {
    ?>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><b>Q</b></span>
-<input type="text" class="form-control"  readonly=""  placeholder="Quantity">
+<input type="text" class="form-control" value="<?php if(isset($_GET['name'])){echo $_GET['quantity'];} ?>"  readonly=""  placeholder="Quantity">
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><b style="color: blue">ট</b></span>
-<input type="text" class="form-control" required="" name="retail" onkeypress="return isNumberKey(event)" placeholder="Retail Price">
+<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['retail'];} ?>" name="retail" onkeypress="return isNumberKey(event)" placeholder="Retail Price">
 </div>
 
 
@@ -405,20 +405,29 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 </div>
 
 <div class="row">
-    
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="text-center mg-b-pro-edt custom-pro-edt-ds">
-<button type="submit" name="add_product" class="btn btn-primary waves-effect waves-light m-r-10">Save
-</button>
-<button type="reset" name="" class="btn btn-info  m-r-10">Reset
-</button>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
+            <?php
+            if (!isset($_GET['update'])) {
+                ?>
+                <button type="submit" name="add_product" class="btn btn-primary waves-effect waves-light m-r-10">Save
+                </button>
+                <?php
+
+            }
+            ?>
+<!-- <button type="reset" name="" class="btn btn-info  m-r-10">Reset
+</button> -->
 <?php
 if (isset($_GET['update']) && $_GET['p_id']) {
-   ?>
-<button type="submit" name="update_product" class="btn btn-primary waves-effect waves-light m-r-10">Update
-</button>
+ ?>
+ <input type="hidden" name="id" value="<?php echo $_GET['p_id'];?>">
+ <input type="hidden" name="old_photo" value="<?php echo $_GET['photo'];?>">
+ <button type="submit" name="update_product" class="btn btn-primary waves-effect waves-light m-r-10">Update
+ </button>
 
-   <?php
+ <?php
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE ) {
+//if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
   
 ?>
 
@@ -35,7 +36,7 @@ if ($_SESSION['sm_staff']==TRUE) {
        }
    </style>
         <!-- <div class="section-admin container-fluid">
-		
+        
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
@@ -84,113 +85,130 @@ if ($_SESSION['sm_staff']==TRUE) {
 
 ?>
 
+<style type="text/css">
+    .text-danger strong {
+            color: #9f181c;
+        }
+        .receipt-main {
+            background: #ffffff none repeat scroll 0 0;
+            border-bottom: 12px solid #333333;
+            border-top: 12px solid #9f181c;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 40px 30px !important;
+            position: relative;
+            box-shadow: 0 1px 21px #acacac;
+            color: #333333;
+            font-family: open sans;
+        }
+        .receipt-main p {
+            color: #333333;
+            font-family: open sans;
+            line-height: 1.42857;
+        }
+        .receipt-footer h1 {
+            font-size: 15px;
+            font-weight: 400 !important;
+            margin: 0 !important;
+        }
+        .receipt-main::after {
+            background: #414143 none repeat scroll 0 0;
+            content: "";
+            height: 5px;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: -13px;
+        }
+        .receipt-main thead {
+            background: #414143 none repeat scroll 0 0;
+        }
+        .receipt-main thead th {
+            color:#fff;
+        }
+        .receipt-right h5 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 7px 0;
+        }
+        .receipt-right p {
+            font-size: 12px;
+            margin: 0px;
+        }
+        .receipt-right p i {
+            text-align: center;
+            width: 18px;
+        }
+        .receipt-main td {
+            padding: 9px 20px !important;
+        }
+        .receipt-main th {
+            padding: 13px 20px !important;
+        }
+        .receipt-main td {
+            font-size: 13px;
+            font-weight: initial !important;
+        }
+        .receipt-main td p:last-child {
+            margin: 0;
+            padding: 0;
+        }   
+        .receipt-main td h2 {
+            font-size: 20px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .receipt-header-mid .receipt-left h1 {
+            font-weight: 100;
+            margin: 34px 0 0;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .receipt-header-mid {
+            margin: 24px 0;
+            overflow: hidden;
+        }
+        
+        #container {
+            background-color: #dcdcdc;
+        }
+</style>
 
 
+        <!-- Single pro tab start-->
+        <div class="single-product-tab-area mg-tb-15">
+            <!-- Single pro tab review Start-->
 
-<!-- Static Table Start -->
-        <div class="data-table-area mg-tb-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="sparkline13-list">
-                            <div class="sparkline13-hd">
-                                <div class="main-sparkline13-hd">
-                                    <h1>Products <span class="table-project-n">List</span> </h1>
-                                </div>
-                                <div class="add-product">
-                                <a href="product_m">Add Product</a>
-                            </div>
-                            </div>
-                            <div class="sparkline13-graph">
-                                <div class="datatable-dashv1-list custom-datatable-overright">
-                                    <div id="toolbar">
-                                        <select class="form-control">
-                                                <option value="">Export Basic</option>
-                                                <option value="all">Export All</option>
-                                                <option value="selected">Export Selected</option>
-                                            </select>
+            <div class="single-pro-review-area">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="review-tab-pro-inner">
+
+                                <ul id="myTab3" class="tab-review-design">
+                                    <li class="active"><a href="#description"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Retail</a></li>
+                                    
+                                    <li><a href="#INFORMATION"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Wholesale</a></li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content custom-product-edit">
+                                    <div class="product-tab-list tab-pane fade active in" id="description">
+                                        <div class="row">
+                                           <h2>Parts Sale in Retail</h2>
+                                          <?php include('inc/retail.php');?>
+                                          
+                                        </div>
+                                        
                                     </div>
-                                 <!--  <img src="db/photo/AirFilter.jpg" width="50" height="50"> -->
-                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
-                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-    <thead>
-        <tr>
-            <th data-field="state" data-checkbox="true"></th>
-            
-            <th data-field="name" data-editable="true">Product Name</th>
-            <th data-field="company" data-editable="true">Model</th>
-            <th data-field="price" data-editable="true">Brand</th>
-            <th data-field="date" data-editable="true">Country</th>
-            <th data-field="task" data-editable="true">Vehicle</th>
-            <th data-field="code" data-editable="true">Code</th>
-            <th data-field="email" data-editable="true">Quantity</th>
-            <th data-field="action">Action</th>
-        </tr>
-    </thead>
- <tbody>
-                                           
-<?php
-include('db/db.php');
-$query="select * from product WHERE p_id<>0";
-$result=mysqli_query($con,$query);
-//echo mysqli_error();
-if(mysqli_num_rows($result)>0){
-
-while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-    $id=$row['p_id'];
-echo "<tr>";
-
-echo "<td style='text-align: center'></td>"; 
-echo "<td style='text-align: center'>".$row['name']."</td>"; 
-echo "<td style='text-align: center'>".$row['model']."</td>";
-echo "<td style='text-align: center'>".$row['brand']."</td>";
-echo "<td style='text-align: center'>".$row['region']."</td>";
-echo "<td style='text-align: center'>".$row['vehicle']."</td>";
-echo "<td style='text-align: center'>".$row['code']."</td>";
-echo "<td style='text-align: center'>".$row['quantity']."</td>";
-
-// echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='branch_report?view&id=".$row['p_id']."'><button class='btn btn-info'>Details</button></a></td>"; 
-echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
-
-echo "</tr>";
-?>
-<!--  <a class="Danger danger-color" href="#" data-toggle="modal" data-target="#DangerModalhdbgcl">Danger</a> -->
-<div id="DangerModalhdbgcl<?php echo $id;?>" class="modal modal-adminpro-general FullColor-popup-DangerModal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header header-color-modal bg-color-4">
-                                        <h4 class="modal-title"><?php echo $row['name'];?></h4>
-                                        <div class="modal-close-area modal-close-df">
-                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                             
+                                    <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                               gdgdf
+                                            </div>
                                         </div>
                                     </div>
-                                    <?php  echo "Product ID : ". $row['p_id'];?>
-                                    <div class="modal-body">
-                                        <span class="adminpro-icon adminpro-danger-error modal-check-pro information-icon-pro"></span>
-                                        <img width="400" height="400" src="db/<?php echo $row['photo'];?>">
-                                        
-                        <p>Wholesale Price : <?php echo $row['wholesale'];?> </p>
-                        <p>Retail Price : <?php echo $row['retail'];?> </p>
-                                        
-                                       
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a data-dismiss="modal" href="#">Cancel</a>
-                                        <a href="product_m?update&p_id=<?php echo $row['p_id'];?>&name=<?php echo $row['name'];?>&model=<?php echo $row['model'];?>&brand=<?php echo $row['brand'];?>&code=<?php echo $row['code'];?>&vehicle=<?php echo $row['vehicle'];?>&wholesale=<?php echo $row['wholesale'];?>&retail=<?php echo $row['retail'];?>&photo=<?php echo $row['photo'];?>&quantity=<?php echo $row['quantity'];?>">Update</a>
-                                        <a class="confirmation" href="db/db_product.php?delete&id<?php echo $row['p_id'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-<?php
-
-}
-}
-
-?>
-
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -198,29 +216,8 @@ echo "</tr>";
                 </div>
             </div>
         </div>
-        <!-- Static Table End -->
 
 
-
-<!-- <a href="delete.php?id=22" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a> -->
-
-
-  <script type="text/javascript">
-    $('.confirmation').on('click', function () {
-        return confirm('Are you sure?');
-    });
-</script>
-       <!--  <div class="calender-area mg-tb-30">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="calender-inner">
-                            <div id='calendar'></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
@@ -304,7 +301,7 @@ echo "</tr>";
 <?PHP
 
 }else{
-    header('location:login/login');
+    header('location:sale?select');
 }
 
 ?>

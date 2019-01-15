@@ -35,7 +35,7 @@ if ($_SESSION['sm_staff']==TRUE) {
        }
    </style>
         <!-- <div class="section-admin container-fluid">
-		
+        
             <div class="row admin text-center">
                 <div class="col-md-12">
                     <div class="row">
@@ -98,7 +98,7 @@ if ($_SESSION['sm_staff']==TRUE) {
                                     <h1>Products <span class="table-project-n">List</span> </h1>
                                 </div>
                                 <div class="add-product">
-                                <a href="product_m">Add Product</a>
+                                <a href="purchase_h">Purchase History</a>
                             </div>
                             </div>
                             <div class="sparkline13-graph">
@@ -124,7 +124,7 @@ if ($_SESSION['sm_staff']==TRUE) {
             <th data-field="task" data-editable="true">Vehicle</th>
             <th data-field="code" data-editable="true">Code</th>
             <th data-field="email" data-editable="true">Quantity</th>
-            <th data-field="action">Action</th>
+            <th data-field="action">Purchase</th>
         </tr>
     </thead>
  <tbody>
@@ -149,39 +149,12 @@ echo "<td style='text-align: center'>".$row['vehicle']."</td>";
 echo "<td style='text-align: center'>".$row['code']."</td>";
 echo "<td style='text-align: center'>".$row['quantity']."</td>";
 
-// echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='branch_report?view&id=".$row['p_id']."'><button class='btn btn-info'>Details</button></a></td>"; 
-echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
+echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='purchase_input?add&id=".$row['p_id']."&name=".$row['name']."'><button class='btn btn-info'>Purchase</button></a></td>"; 
+// echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
 
 echo "</tr>";
 ?>
-<!--  <a class="Danger danger-color" href="#" data-toggle="modal" data-target="#DangerModalhdbgcl">Danger</a> -->
-<div id="DangerModalhdbgcl<?php echo $id;?>" class="modal modal-adminpro-general FullColor-popup-DangerModal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header header-color-modal bg-color-4">
-                                        <h4 class="modal-title"><?php echo $row['name'];?></h4>
-                                        <div class="modal-close-area modal-close-df">
-                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <?php  echo "Product ID : ". $row['p_id'];?>
-                                    <div class="modal-body">
-                                        <span class="adminpro-icon adminpro-danger-error modal-check-pro information-icon-pro"></span>
-                                        <img width="400" height="400" src="db/<?php echo $row['photo'];?>">
-                                        
-                        <p>Wholesale Price : <?php echo $row['wholesale'];?> </p>
-                        <p>Retail Price : <?php echo $row['retail'];?> </p>
-                                        
-                                       
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a data-dismiss="modal" href="#">Cancel</a>
-                                        <a href="product_m?update&p_id=<?php echo $row['p_id'];?>&name=<?php echo $row['name'];?>&model=<?php echo $row['model'];?>&brand=<?php echo $row['brand'];?>&code=<?php echo $row['code'];?>&vehicle=<?php echo $row['vehicle'];?>&wholesale=<?php echo $row['wholesale'];?>&retail=<?php echo $row['retail'];?>&photo=<?php echo $row['photo'];?>&quantity=<?php echo $row['quantity'];?>">Update</a>
-                                        <a class="confirmation" href="db/db_product.php?delete&id<?php echo $row['p_id'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 <?php
 
 }
