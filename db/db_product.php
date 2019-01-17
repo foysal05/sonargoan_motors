@@ -22,7 +22,7 @@ if (isset($_POST['add_product'])) {
 		move_uploaded_file($temp,"photo/".$name);
 		$path="photo/$name";
 
-		$query="INSERT INTO product VALUES('','$product_name','$model','$brand','$region','$vehicle','$code','0','0','$path')";
+		$query="INSERT INTO product VALUES('','$product_name','$model','$brand','$region','$vehicle','$code','0','0','$path','')";
 		$result=mysqli_query($con,$query);
 		if ($result) {
 			header('location:../product_m?added=1');

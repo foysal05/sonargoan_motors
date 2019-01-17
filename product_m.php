@@ -86,22 +86,43 @@ if ($_SESSION['sm_staff']==TRUE) {
 <span class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
 <input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['brand'];} ?>" name="brand" placeholder="Brand">
 </div>
+
+  <?php
+  if (isset($_GET['update']) && $_GET['p_id']) {
+    include('db/db.php');
+    $query="SELECT * FROM purchase WHERE product_id='".$_GET['p_id']."'";
+   // echo $query;
+    $result=mysqli_query($con,$query);
+                //echo mysqli_error();
+    if(mysqli_num_rows($result)>0){
+
+        while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $purchase_price=$row['unit_price'];
+
+        }
+    }
+
+    ?>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b>P</b></span>
+<input type="text" class="form-control"  readonly="" value="<?php echo $purchase_price;?>"  placeholder="Purchase Price">
+</div>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><b style="color: green">W</b></span>
+<input type="number" class="form-control" required="" id="wholesale" name="wholesale" onkeypress="return isNumberKey(event)" onblur="checkWholeprice(this)" value="<?php if(isset($_GET['wholesale'])){echo $_GET['wholesale'];} ?>" onchange="document.getElementById('retail').min=this.value;" min="<?php $w=$purchase_price+1; echo $w; ?>" placeholder="Wholesale Price">
+</div>
+<script>
+  function checkWholeprice(el) {
+    if (el.value < <?php echo $purchase_price;?>) {
+        alert("Wholesale Price Should Be More Than Purchase Price")
+    }
+}
+</script>
+
 <div class="form-group">
     <label for="exampleFormControlFile1">Parts Photo</label>
     <input accept=".jpg,.jpeg,.png"  name="parts_photo" type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
-<?php
-if (isset($_GET['update']) && $_GET['p_id']) {
-   ?>
-<div class="input-group mg-b-pro-edt">
-<span class="input-group-addon"><b>P</b></span>
-<input type="text" class="form-control"  readonly=""  placeholder="Purchase Price">
-</div>
-<div class="input-group mg-b-pro-edt">
-<span class="input-group-addon"><b style="color: green">ট</b></span>
-<input type="text" class="form-control" required="" name="wholesale" onkeypress="return isNumberKey(event)" value="<?php if(isset($_GET['wholesale'])){echo $_GET['wholesale'];} ?>" placeholder="Wholesale Price">
-</div>
-
 <?php
 
 }
@@ -390,11 +411,18 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 <input type="text" class="form-control" value="<?php if(isset($_GET['name'])){echo $_GET['quantity'];} ?>"  readonly=""  placeholder="Quantity">
 </div>
 <div class="input-group mg-b-pro-edt">
-<span class="input-group-addon"><b style="color: blue">ট</b></span>
-<input type="text" class="form-control" required="" value="<?php if(isset($_GET['name'])){echo $_GET['retail'];} ?>" name="retail" onkeypress="return isNumberKey(event)" placeholder="Retail Price">
+<span class="input-group-addon"><b style="color: blue">R</b></span>
+<input type="number" class="form-control" id="retail" required="" value="<?php if(isset($_GET['name'])){echo $_GET['retail'];} ?>" name="retail" value" onblur="checkRetail(this)" onkeypress="return isNumberKey(event)" placeholder="Retail Price">
 </div>
 
 
+<script type="text/javascript">
+    function checkRetail(el) {
+       var w=document.getElementById('wholesale').value;
+       document.getElementById('retail').setAttribute("min", w);
+
+    }
+</script>
 
 <?php
 }

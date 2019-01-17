@@ -204,9 +204,11 @@ if ($_SESSION['sm_staff']==TRUE ) {
                              
                                     <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                               gdgdf
-                                            </div>
+                                            <div class="row">
+                                           <h2>Parts Sale in Wholesale</h2>
+                                          <?php include('inc/wholesale.php');?>
+                                          
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

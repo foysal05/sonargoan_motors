@@ -150,7 +150,7 @@ echo "<td style='text-align: center'>".$row['code']."</td>";
 echo "<td style='text-align: center'>".$row['quantity']."</td>";
 
 // echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='branch_report?view&id=".$row['p_id']."'><button class='btn btn-info'>Details</button></a></td>"; 
-echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
+echo "<td><button class='btn btn-info'><a style='color:white;' class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></button></td>";
 
 echo "</tr>";
 ?>

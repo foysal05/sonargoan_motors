@@ -27,7 +27,7 @@
                             </ul>
                         </li>
 
-                        <li><a title="Invoice" href="invoice" aria-expanded="false"><i class="fa fa-files-o  icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Invoice</span></a></li>
+                        <!-- <li><a title="Invoice" href="invoice" aria-expanded="false"><i class="fa fa-files-o  icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Invoice</span></a></li> -->
                        <!--  <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa big-icon fa-flask icon-wrap"></i> <span class="mini-click-non">Interface</span></a>
                             <ul class="submenu-angle" aria-expanded="false">

@@ -32,9 +32,9 @@
                         </td>
                         <td class="col-md-2">
   <input type="hidden" name="id[]" value="<?php echo $product_id;?>">
-  <input type="hidden" name="type" value="1">
+  <input type="hidden" name="type" value="2">
   
- <input style="border:none;" readonly="" id="retail<?php echo $product_id;?>" type="text" readonly="" value="<?php echo $row['retail'];?>" name=""> 
+ <input style="border:none;" readonly="" id="retail<?php echo $product_id;?>" type="text" readonly="" value="<?php echo $row['wholesale'];?>" name=""> 
                         </td>
                         <td class="col-md-2">
 <input type="text" class="price" value="" style="border:none;" readonly="" name=""  id="total_cost<?php echo $product_id;?>">
