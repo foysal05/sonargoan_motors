@@ -1,7 +1,6 @@
 <?php
 session_start();
-//if ($_SESSION['sm_staff']==TRUE ) {
-if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
+if ($_SESSION['sm_staff']==TRUE) {
   
 ?>
 
@@ -50,12 +49,12 @@ if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
         </div> -->
  <?php
 
-    if (isset($_GET['updated'])==1) {
+    if (isset($_GET['done'])==1) {
         ?>
 
         <div class="alert alert-success alert-st-one" role="alert">
             <i class="fa fa-check adminpro-checked-pro admin-check-pro" aria-hidden="true"></i>
-            <p class="message-mg-rt"><strong>Well done!</strong> Product Information Updated Sussessfully.</p>
+            <p class="message-mg-rt"><strong>Well done!</strong> Product Sales Are Completed Successfully
         </div>
         <?php
     }else if (isset($_GET['exist'])==1) {
@@ -85,132 +84,102 @@ if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
 
 ?>
 
-<style type="text/css">
-    .text-danger strong {
-            color: #9f181c;
-        }
-        .receipt-main {
-            background: #ffffff none repeat scroll 0 0;
-            border-bottom: 12px solid #333333;
-            border-top: 12px solid #9f181c;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            padding: 40px 30px !important;
-            position: relative;
-            box-shadow: 0 1px 21px #acacac;
-            color: #333333;
-            font-family: open sans;
-        }
-        .receipt-main p {
-            color: #333333;
-            font-family: open sans;
-            line-height: 1.42857;
-        }
-        .receipt-footer h1 {
-            font-size: 15px;
-            font-weight: 400 !important;
-            margin: 0 !important;
-        }
-        .receipt-main::after {
-            background: #414143 none repeat scroll 0 0;
-            content: "";
-            height: 5px;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: -13px;
-        }
-        .receipt-main thead {
-            background: #414143 none repeat scroll 0 0;
-        }
-        .receipt-main thead th {
-            color:#fff;
-        }
-        .receipt-right h5 {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0 0 7px 0;
-        }
-        .receipt-right p {
-            font-size: 12px;
-            margin: 0px;
-        }
-        .receipt-right p i {
-            text-align: center;
-            width: 18px;
-        }
-        .receipt-main td {
-            padding: 9px 20px !important;
-        }
-        .receipt-main th {
-            padding: 13px 20px !important;
-        }
-        .receipt-main td {
-            font-size: 13px;
-            font-weight: initial !important;
-        }
-        .receipt-main td p:last-child {
-            margin: 0;
-            padding: 0;
-        }   
-        .receipt-main td h2 {
-            font-size: 20px;
-            font-weight: 900;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .receipt-header-mid .receipt-left h1 {
-            font-weight: 100;
-            margin: 34px 0 0;
-            text-align: right;
-            text-transform: uppercase;
-        }
-        .receipt-header-mid {
-            margin: 24px 0;
-            overflow: hidden;
-        }
-        
-        #container {
-            background-color: #dcdcdc;
-        }
-</style>
 
 
-        <!-- Single pro tab start-->
-        <div class="single-product-tab-area mg-tb-15">
-            <!-- Single pro tab review Start-->
 
-            <div class="single-pro-review-area">
-                <div class="container-fluid">
-                    <div class="row">
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="review-tab-pro-inner">
-
-                                <ul id="myTab3" class="tab-review-design">
-                                    <li class="active"><a href="#description"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Retail</a></li>
-                                    
-                                    <li><a href="#INFORMATION"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Wholesale</a></li>
-                                </ul>
-                                <div id="myTabContent" class="tab-content custom-product-edit">
-                                    <div class="product-tab-list tab-pane fade active in" id="description">
-                                        <div class="row">
-                                           <h2>Parts Sale in Retail</h2>
-                                          <?php include('inc/retail.php');?>
-                                          
-                                        </div>
-                                        
+<!-- Static Table Start -->
+        <div class="data-table-area mg-tb-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1>Sale <span class="table-project-n">History</span> </h1>
+                                </div>
+                                <div class="add-product">
+                                <!-- <a href="sale">New Sale</a> -->
+                                <form>
+<div class="input-group mg-b-pro-edt">
+<span class="input-group-addon"><i class="fa fa-edit" aria-hidden="true"></i></span>
+<input type="date" class="form-control" required=""  name="name" placeholder="Parts Name">
+</div>
+<div class="input-group mg-b-pro-edt">
+<!-- <span class="input-group-addon"><i class="fa fa-edit" aria-hidden="true"></i></span> -->
+<button type="submit" name="get" style="background-color: #BF1906" class="btn btn-info">Get Report</button>
+</div>
+                                </form>
+                            </div>
+                            </div>
+                            <div class="sparkline13-graph">
+                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div id="toolbar">
+                                        <select class="form-control">
+                                                <option value="">Export Basic</option>
+                                                <option value="all">Export All</option>
+                                                <option value="selected">Export Selected</option>
+                                            </select>
                                     </div>
-                             
-                                    <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                                        
-                                            <div class="row">
-                                           <h2>Parts Sale in Wholesale</h2>
-                                          <?php include('inc/wholesale.php');?>
-                                          
-                                       
-                                        </div>
-                                    </div>
+                                 <!--  <img src="db/photo/AirFilter.jpg" width="50" height="50"> -->
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+    <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            
+            <th data-field="#" data-editable="true">Invoice ID</th>
+            <th data-field="name" data-editable="true">Product Name</th>
+            <th data-field="company" data-editable="true">Model</th>
+            <th data-field="price" data-editable="true">Quantity</th>
+            
+            <th data-field="email" data-editable="true">Date</th>
+            <th data-field="time" data-editable="true">Time</th>
+            <th data-field="action">Type</th>
+        </tr>
+    </thead>
+ <tbody>
+                                           
+<?php
+include('db/db.php');
+$query="select * from sale,product WHERE item_id=p_id ORDER BY invoice_id DESC ";
+$result=mysqli_query($con,$query);
+//echo mysqli_error();
+if(mysqli_num_rows($result)>0){
+
+while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+    $id=$row['p_id'];
+echo "<tr>";
+
+echo "<td style='text-align: center'></td>"; 
+echo "<td style='text-align: center'>".$row['invoice_id']."</td>"; 
+echo "<td style='text-align: center'>".$row['name']."</td>"; 
+echo "<td style='text-align: center'>".$row['model']."</td>";
+echo "<td style='text-align: center'>".$row['s_quantity']."</td>";
+echo "<td style='text-align: center'>".$row['date']."</td>";
+echo "<td style='text-align: center'>".$row['time']."</td>";
+// echo "<td style='text-align: center'>".$row['code']."</td>";
+if ($row['type']=='1') {
+  echo "<td style='text-align: center'>Retail</td>";
+}else{
+    echo "<td style='text-align: center'>Whole Sale</td>";
+}
+ 
+
+ 
+// echo "<td><a class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></td>";
+
+echo "</tr>";
+?>
+
+<?php
+
+}
+}
+
+?>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -218,8 +187,29 @@ if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
                 </div>
             </div>
         </div>
+        <!-- Static Table End -->
 
 
+
+<!-- <a href="delete.php?id=22" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a> -->
+
+
+  <script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+</script>
+       <!--  <div class="calender-area mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="calender-inner">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
@@ -303,7 +293,7 @@ if ($_SESSION['sm_staff']==TRUE && $_POST['id']) {
 <?PHP
 
 }else{
-    header('location:sale?select');
+    header('location:login/login');
 }
 
 ?>

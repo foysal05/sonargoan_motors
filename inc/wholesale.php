@@ -28,7 +28,7 @@
                     <tr>
                         <td class="col-md-6"><?php echo $row['name'];?></td>
                         <td class="col-md-2">
-<input onchange="myFunction<?php echo $parts;?>(quantity<?php echo $product_id; ?>,retail<?php echo $product_id;?>,total_cost<?php echo $product_id;?>);TotalPrice()" type="number" onkeypress="return isNumberKeyDiscount(event)" max="<?php echo $row['quantity'];?>" min="1" class="qp" id="quantity<?php echo $product_id;?>" name="quantity[]">
+<input onchange="myFunctionW<?php echo $parts;?>(quantity<?php echo $product_id; ?>,retail<?php echo $product_id;?>,total_cost<?php echo $product_id;?>);TotalPrice()" type="number" onkeypress="return isNumberKeyDiscount(event)" max="<?php echo $row['quantity'];?>" min="1" class="qp" id="quantity<?php echo $product_id;?>" name="quantity[]">
                         </td>
                         <td class="col-md-2">
   <input type="hidden" name="id[]" value="<?php echo $product_id;?>">
@@ -43,7 +43,7 @@
 
 
                     <script type="text/javascript">
-                      function myFunction<?php echo $parts;?>(q,r,t){
+                      function myFunctionW<?php echo $parts;?>(q,r,t){
                         var quantity =q.value;
                         var price =r.value;
                         var cal=price*quantity;

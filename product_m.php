@@ -105,7 +105,7 @@ if ($_SESSION['sm_staff']==TRUE) {
     ?>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><b>P</b></span>
-<input type="text" class="form-control"  readonly="" value="<?php echo $purchase_price;?>"  placeholder="Purchase Price">
+<input type="text" class="form-control"  readonly="" value="<?php if(isset($purchase_price)){echo $purchase_price;}?>"  placeholder="Purchase Price">
 </div>
 <div class="input-group mg-b-pro-edt">
 <span class="input-group-addon"><b style="color: green">W</b></span>

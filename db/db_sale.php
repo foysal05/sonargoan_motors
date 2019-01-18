@@ -8,6 +8,7 @@ $payable=$_POST['payable'];
 $total=$_POST['total'];
 $less=$_POST['less'];
 $ids=$_POST['id'];
+$type=$_POST['type'];
 $quantitys=$_POST['quantity'];
 $staff_id=$_SESSION['uid'];
 $date=date('m/d/Y');
@@ -55,8 +56,9 @@ $invoice=(int)$row['MAX(invoice_id)'];
 
 foreach (array_combine($ids, $quantitys) as $id => $quantity) {
 
-$query="INSERT INTO sale VALUES('','$new_invoice','$id','$quantity','$total','$less','$payable','$date','$time','$staff_id')";
+$query="INSERT INTO sale VALUES('','$new_invoice','$id','$quantity','$total','$less','$payable','$date','$time','$staff_id','$type')";
 $result=mysqli_query($con,$query);
+//echo $query;
 
 if ($result) {
 	header('location:../sale_list?done');
