@@ -97,9 +97,9 @@ if ($_SESSION['sm_staff']==TRUE) {
                                 <div class="main-sparkline13-hd">
                                     <h1>Products <span class="table-project-n">List</span> </h1>
                                 </div>
-                                <div class="add-product">
+                                <!-- <div class="add-product">
                                 <a href="product_m">Add Product</a>
-                            </div>
+                            </div> -->
                             </div>
                             <div class="sparkline13-graph">
                                 <div class="datatable-dashv1-list custom-datatable-overright">
@@ -124,7 +124,7 @@ if ($_SESSION['sm_staff']==TRUE) {
             <th data-field="task" data-editable="true">Vehicle</th>
             <th data-field="code" data-editable="true">Code</th>
             <th data-field="email" data-editable="true">Quantity</th>
-            <th data-field="action">Action</th>
+            <!-- <th data-field="action">Action</th> -->
         </tr>
     </thead>
  <tbody>
@@ -150,7 +150,7 @@ echo "<td style='text-align: center'>".$row['code']."</td>";
 echo "<td style='text-align: center'>".$row['quantity']."</td>";
 
 // echo "<td style='text-align: center'><a style='color:white; text-decoration: none;' href='branch_report?view&id=".$row['p_id']."'><button class='btn btn-info'>Details</button></a></td>"; 
-echo "<td><button class='btn btn-info'><a style='color:white;' class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></button></td>";
+// echo "<td><button class='btn btn-info'><a style='color:white;' class='Danger danger-color' href='#'' data-toggle='modal' data-target='#DangerModalhdbgcl$id'>Details</a></button></td>";
 
 echo "</tr>";
 ?>

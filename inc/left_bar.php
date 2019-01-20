@@ -5,6 +5,11 @@
                 <strong><img src="img/logo/logosn.png" alt="" /></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <?php
+if ($_SESSION['level']=='1' || $_SESSION['level']=='2' ) {
+   ?>
+
+
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
@@ -31,6 +36,10 @@
        
                     </ul>
                 </nav>
+                 <?php
+}
+
+                ?>
             </div>
         </nav>
     </div>

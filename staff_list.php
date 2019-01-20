@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE && $_SESSION['level']=='1') {
   
 ?>
 
@@ -55,7 +55,7 @@ if ($_SESSION['sm_staff']==TRUE) {
 
         <div class="alert alert-success alert-st-one" role="alert">
             <i class="fa fa-check adminpro-checked-pro admin-check-pro" aria-hidden="true"></i>
-            <p class="message-mg-rt"><strong>Well done!</strong> Product Information Updated Sussessfully.</p>
+            <p class="message-mg-rt"><strong>Well done!</strong> Staff Information Updated Sussessfully.</p>
         </div>
         <?php
     }else if (isset($_GET['exist'])==1) {
@@ -63,7 +63,7 @@ if ($_SESSION['sm_staff']==TRUE) {
      <div class="alert alert-danger alert-mg-b alert-st-four" role="alert">
         <i class="fa fa-window-close adminpro-danger-error admin-check-pro" aria-hidden="true"></i>
         <i class="fa fa-times adminpro-danger-error admin-check-pro" aria-hidden="true"></i>
-        <p class="message-mg-rt"><strong>Oh snap!</strong> This Product May Be Exist.</p>
+        <p class="message-mg-rt"><strong>Oh snap!</strong> This Email May Be Exist.</p>
     </div>
     <?php
 }else if (isset($_GET['error'])==1) {
@@ -78,7 +78,7 @@ if ($_SESSION['sm_staff']==TRUE) {
      ?>
    <div class="alert alert-success alert-st-one" role="alert">
             <i class="fa fa-check adminpro-checked-pro admin-check-pro" aria-hidden="true"></i>
-            <p class="message-mg-rt"><strong>Deleted!</strong> Product Information Deleted Sussessfully.</p>
+            <p class="message-mg-rt"><strong>Deleted!</strong> Staff Information Deleted Sussessfully.</p>
         </div>
     <?php
 }
@@ -182,9 +182,9 @@ if ($_SESSION['sm_staff']==TRUE) {
              <div class="row">
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <h2>Product List</h2>
+    <h2>Staff List</h2>
     <div class="add-product">
-                                <a href="sale_list">Sale List</a>
+                                <a href="staff">Add Staff</a>
                             </div>
                             <br>
     <form action="con_sale" method="post">
@@ -192,14 +192,14 @@ if ($_SESSION['sm_staff']==TRUE) {
             <thead>
 
               <tr style="text-align: center;">
-                <th>#</th>
-                <th>Code</th>
+                
                 <th>Name</th>
-                <th>Brnad</th>
-                <th>Model</th>
-                <th>Quantity</th>
-                <th>Wholesale</th>
-                <th>Retail</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Type</th>
+                <th>Action</th>
+                
                 <!-- <th>Invoice</th> -->
               </tr>
             </thead>
@@ -207,7 +207,7 @@ if ($_SESSION['sm_staff']==TRUE) {
 
               <?php
               include('db/db.php');
-              $query="SELECT * FROM product WHERE quantity <>0 AND wholesale<>0 AND retail<>0";
+              $query="SELECT * FROM users";
       //echo $query;   
 
               $result=mysqli_query($con,$query);
@@ -216,15 +216,36 @@ if ($_SESSION['sm_staff']==TRUE) {
 
                 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
                   echo "<tr>";
-                  echo "<td style='text-align: center'><input type='checkbox' name='id[]' value='".$row['p_id']."'></td>"; 
+                  
+                  echo "<td>".$row['name']."</td>"; 
+                  echo "<td>".$row['phone']."</td>"; 
+                  echo "<td>".$row['email']."</td>"; 
+                  echo "<td>".$row['password']."</td>"; 
+                  if ($row['level']=='1') {
+                       echo "<td>Admin</td>"; 
+                  }else if ($row['level']=='2') {
+                       echo "<td>Manager</td>"; 
+                  }else {
+                    echo "<td>Salesman</td>"; 
+                  }
+                 
+                 // echo "<td style='text-align: center'>".$row['level']."</td>"; 
+                  echo "<td>";
+                  ?>
+                  <button class="btn btn-info"><a style="text-decoration: none; color: white;" href="staff?update&id=<?php echo $row['uid']; ?>&level=<?php echo $row['level']; ?>" >Edit</a></button>
+                  <?php
+if ($row['uid']==$_SESSION['uid']) {
+    echo "Restricted";
+}else{
 
-                  echo "<td style='text-align: center'>".$row['code']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['name']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['brand']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['model']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['quantity']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['wholesale']."</td>"; 
-                  echo "<td style='text-align: center'>".$row['retail']."</td>"; 
+
+                  ?>
+                <a class="btn btn-danger" style="color: white" href="db/db_staff.php?delete&id=<?php echo $row['uid'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
+
+<?php
+}
+                  echo "</td>";
+                
         
 
 
@@ -234,21 +255,10 @@ if ($_SESSION['sm_staff']==TRUE) {
 
               ?>
             </tbody>
-            <tfoot>
-              <tr>
-                <th>#</th>
-                <th>#Code</th>
-                <th>Name</th>
-                <th>Model</th>
-                <th>brnad</th>
-                <th>Quantity</th>
-                <th>Wholesale</th>
-                <th>Retail</th>
-              </tr>
-            </tfoot>
+           
           </table>
 <div>
-    <button type="submit" name="sale" class="btn btn-info btn-block" style="background-color: #C11A06">Sale</button>
+    
 </div>
 </form>
 
@@ -401,7 +411,7 @@ if ($_SESSION['sm_staff']==TRUE) {
 <?PHP
 
 }else{
-    header('location:sale?select=0');
+    header('location:index');
 }
 
 ?>

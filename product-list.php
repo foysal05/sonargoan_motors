@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE && $_SESSION['level']=='1' || $_SESSION['level']=='2') {
   
 ?>
 
@@ -177,7 +177,7 @@ echo "</tr>";
                                     <div class="modal-footer">
                                         <a data-dismiss="modal" href="#">Cancel</a>
                                         <a href="product_m?update&p_id=<?php echo $row['p_id'];?>&name=<?php echo $row['name'];?>&model=<?php echo $row['model'];?>&brand=<?php echo $row['brand'];?>&code=<?php echo $row['code'];?>&vehicle=<?php echo $row['vehicle'];?>&wholesale=<?php echo $row['wholesale'];?>&retail=<?php echo $row['retail'];?>&photo=<?php echo $row['photo'];?>&quantity=<?php echo $row['quantity'];?>">Update</a>
-                                        <a class="confirmation" href="db/db_product.php?delete&id<?php echo $row['p_id'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
+                                        <a class="confirmation" href="db/db_product.php?delete&id=<?php echo $row['p_id'];?>" style="background-color: red;" onclick = "if (! confirm('Are You Sure To Delete This?')) { return false; }">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@ echo "</tr>";
 <?PHP
 
 }else{
-    header('location:login/login');
+    header('location:index');
 }
 
 ?>

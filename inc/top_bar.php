@@ -15,12 +15,39 @@
                              <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                 <div class="header-top-menu tabl-d-n">
                                     <ul class="nav navbar-nav mai-top-nav">
-                                        <li class="nav-item"><a href="purchase" class="nav-link">Purchase</a>
-                                        </li>
+                                        <?PHP
+                                        if ($_SESSION['level']<>'3') {
+                                         ?>
+
+
+                                         <li class="nav-item"><a href="purchase" class="nav-link">Purchase</a>
+
+                                         </li>
+                                         <?php
+                                     }
+                                     ?>
                                         <li class="nav-item"><a href="sale" class="nav-link">Sale</a>
                                         </li>
-                                       <!--  <li class="nav-item"><a href="invoice" class="nav-link">Invoice</a>
-                                        </li> -->
+                                         <?PHP
+                                        if ($_SESSION['level']=='1') {
+                                         ?>
+                                        <li class="nav-item"><a href="staff_list" class="nav-link">Staff</a>
+                                             <?php
+                                     }
+                                     ?>
+                                        </li><li class="nav-item"><a>
+                                   <?php 
+                                   if ($_SESSION['level']=='1') {
+                                       echo "<td><b>Login As: Admin</b></td>"; 
+                                  }else if ($_SESSION['level']=='2') {
+                                       echo "<td>Login As: Manager</td>"; 
+                                  }else {
+                                    echo "<td>Login As: Salesman</td>";
+
+                                  }?>
+                                      
+                                  </a>
+                                        </li>
                                         
                                     </ul>
                                 </div>

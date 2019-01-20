@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE && $_SESSION['level']=='1' || $_SESSION['level']=='2') {
   
 ?>
 
@@ -279,7 +279,7 @@ echo "</tr>";
 <?PHP
 
 }else{
-    header('location:login/login');
+    header('location:index');
 }
 
 ?>

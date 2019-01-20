@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE && $_SESSION['level']=='1' || $_SESSION['level']=='2') {
   
 ?>
 
@@ -8,9 +8,43 @@ if ($_SESSION['sm_staff']==TRUE) {
 <html class="no-js" lang="en">
 
 <?php include('inc/head.php');?>
-<!-- modals CSS
-        ============================================ -->
-    <link rel="stylesheet" href="css/modals.css">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#datepickerF" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#datepickerT" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  </script>
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -34,19 +68,7 @@ if ($_SESSION['sm_staff']==TRUE) {
         padding-bottom: 22px;
        }
    </style>
-        <!-- <div class="section-admin container-fluid">
-        
-            <div class="row admin text-center">
-                <div class="col-md-12">
-                    <div class="row">
-                        
-                        
-                      
-                     
-                    </div>
-                </div>
-            </div>
-        </div> -->
+   
  <?php
 
     if (isset($_GET['done'])==1) {
@@ -98,17 +120,42 @@ if ($_SESSION['sm_staff']==TRUE) {
                                     <h1>Sale <span class="table-project-n">History</span> </h1>
                                 </div>
                                 <div class="add-product">
+<script type="text/javascript">
+    function validateForm() {
+  var start = document.forms["myForm"]["start"].value;
+  var end = document.forms["myForm"]["end"].value;
+  
+  if (start == "") {
+    alert("Please Select Start Date");
+    return false;
+  }else if (end == "") {
+    alert("Please Select End Date");
+    return false;
+  }
+}
+</script>
                                 <!-- <a href="sale">New Sale</a> -->
-                                <form>
-<div class="input-group mg-b-pro-edt">
-<span class="input-group-addon"><i class="fa fa-edit" aria-hidden="true"></i></span>
-<input type="date" class="form-control" required=""  name="name" placeholder="Parts Name">
+<form action="" method="post" name="myForm" onsubmit="return validateForm()">
+
+<!-- =============================================== -->
+<div class="sparkline16-graph">
+    <div class="date-picker-inner">
+        <div class="form-group data-custon-pick data-custom-mg" id="data_5">
+            <label>Range Date select</label>
+            <div class="input-daterange input-group" id="datepicker">
+                <input type="text" class="form-control" required="" name="start" value="<?php echo date('m/d/Y');?>" />
+                <span class="input-group-addon">TO</span>
+                <input type="text" class="form-control" required="" name="end" value="<?php echo date('m/d/Y');?>" />
+            </div>
+        </div>
+    </div>
 </div>
+<br>
 <div class="input-group mg-b-pro-edt">
 <!-- <span class="input-group-addon"><i class="fa fa-edit" aria-hidden="true"></i></span> -->
 <button type="submit" name="get" style="background-color: #BF1906" class="btn btn-info">Get Report</button>
 </div>
-                                </form>
+ </form>
                             </div>
                             </div>
                             <div class="sparkline13-graph">
@@ -131,6 +178,7 @@ if ($_SESSION['sm_staff']==TRUE) {
             <th data-field="name" data-editable="true">Product Name</th>
             <th data-field="company" data-editable="true">Model</th>
             <th data-field="price" data-editable="true">Quantity</th>
+            <th data-field="amount" data-editable="true">Amount</th>
             
             <th data-field="email" data-editable="true">Date</th>
             <th data-field="time" data-editable="true">Time</th>
@@ -141,13 +189,21 @@ if ($_SESSION['sm_staff']==TRUE) {
                                            
 <?php
 include('db/db.php');
-$query="select * from sale,product WHERE item_id=p_id ORDER BY invoice_id DESC ";
+if (isset($_POST['get'])) {
+$start=$_POST['start'];
+$end=$_POST['end'];
+  $query="select * from sale,product WHERE item_id=p_id AND time BETWEEN '$start' AND '$end'  ORDER BY invoice_id DESC ";  
+}else{
+    $query="select * from sale,product WHERE item_id=p_id ORDER BY invoice_id DESC ";
+}
+//$query="select * from sale,product WHERE item_id=p_id ORDER BY invoice_id DESC ";
 $result=mysqli_query($con,$query);
 //echo mysqli_error();
 if(mysqli_num_rows($result)>0){
-
+$total=0;
 while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
     $id=$row['p_id'];
+    $total+=$row['payable_amount'];
 echo "<tr>";
 
 echo "<td style='text-align: center'></td>"; 
@@ -155,6 +211,7 @@ echo "<td style='text-align: center'>".$row['invoice_id']."</td>";
 echo "<td style='text-align: center'>".$row['name']."</td>"; 
 echo "<td style='text-align: center'>".$row['model']."</td>";
 echo "<td style='text-align: center'>".$row['s_quantity']."</td>";
+echo "<td style='text-align: center'>".$row['payable_amount']."</td>";
 echo "<td style='text-align: center'>".$row['date']."</td>";
 echo "<td style='text-align: center'>".$row['time']."</td>";
 // echo "<td style='text-align: center'>".$row['code']."</td>";
@@ -179,8 +236,10 @@ echo "</tr>";
 ?>
 
                                         </tbody>
+                                        
                                     </table>
-                                </div>
+                                    <h3>Total Amount : <?php echo " ".$total."/= BDT";?></h3>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -274,10 +333,10 @@ echo "</tr>";
     <script src="js/editable/bootstrap-datetimepicker.js"></script>
     <script src="js/editable/bootstrap-editable.js"></script>
     <script src="js/editable/xediable-active.js"></script>
-    <!-- Chart JS
+   <!-- datapicker JS
         ============================================ -->
-    <script src="js/chart/jquery.peity.min.js"></script>
-    <script src="js/peity/peity-active.js"></script>
+    <script src="js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/datapicker/datepicker-active.js"></script>
     <!-- tab JS
         ============================================ -->
     <script src="js/tab.js"></script>
@@ -293,7 +352,7 @@ echo "</tr>";
 <?PHP
 
 }else{
-    header('location:login/login');
+    header('location:index');
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['sm_staff']==TRUE) {
+if ($_SESSION['sm_staff']==TRUE && $_SESSION['level']=='1' || $_SESSION['level']=='2') {
   
 ?>
 
@@ -90,13 +90,13 @@ if ($_SESSION['sm_staff']==TRUE) {
   <?php
   if (isset($_GET['update']) && $_GET['p_id']) {
     include('db/db.php');
-    $query="SELECT * FROM purchase WHERE product_id='".$_GET['p_id']."'";
+    $query1="SELECT * FROM purchase WHERE product_id='".$_GET['p_id']."'";
    // echo $query;
-    $result=mysqli_query($con,$query);
+    $result1=mysqli_query($con,$query1);
                 //echo mysqli_error();
-    if(mysqli_num_rows($result)>0){
+    if(mysqli_num_rows($result1)>0){
 
-        while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        while($row=mysqli_fetch_array($result1, MYSQLI_ASSOC)){
             $purchase_price=$row['unit_price'];
 
         }
@@ -121,8 +121,9 @@ if ($_SESSION['sm_staff']==TRUE) {
 
 <div class="form-group">
     <label for="exampleFormControlFile1">Parts Photo</label>
-    <input accept=".jpg,.jpeg,.png"  name="parts_photo" type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
+    <input   name="parts_photo" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="exampleFormControlFile1">
+</div>
+
 <?php
 
 }
@@ -679,7 +680,7 @@ if (isset($_GET['update']) && $_GET['p_id']) {
 <?PHP
 
 }else{
-    header('location:login/login');
+    header('location:index');
 }
 
 ?>
