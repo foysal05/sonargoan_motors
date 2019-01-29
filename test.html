@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<input type="text" name="" id="phone">
+
+<script type="text/javascript">
+	$('#phone').keypress(function () {
+    var maxLength = $(this).val().length;
+    if (maxLength >= 11) {
+        alert('You cannot enter more than ' + maxLength + ' chars');
+        return false;
+    }
+});
+</script>
+</body>
+</html>
